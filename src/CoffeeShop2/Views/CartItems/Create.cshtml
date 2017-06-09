@@ -1,0 +1,72 @@
+@model CoffeeShop2.Models.CartItem
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>CartItem</h4>
+        <h3>Are you sure you want to add the following item to your cart?</h3>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="CartId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <p>@ViewBag.CartId</p>
+                <input type="hidden" asp-for="CartId" class ="form-control" asp-items="ViewBag.CartId">
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                @*<select asp-for="ProductId" class ="form-control" asp-items="ViewBag.ProductId"></select>*@
+                <p>@ViewBag.ProductId</p>
+                <input type="hidden" asp-for="ProductId" class="form-control" />
+                <span asp-validation-for="ProductId" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Quantity" class="form-control" />
+                    <span asp-validation-for="Quantity" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <p>@User.Identity.Name</p>
+                    <input type="hidden" asp-for="UserId" class="form-control" />
+                    <span asp-validation-for="UserId" class="text-danger" />
+                </div>
+            </div>
+        <div>
+            <label class="col-md-2 control-label">Product Name</label>
+            <div class="col-md-10">
+                <p>@ViewData["PName"]</p>
+            </div>
+        </div>
+        <div>
+            <label class="col-md-2 control-label">Price</label>
+            <div class="col-md-10">
+                <p>@ViewData["PPrice"]</p>
+            </div>
+        </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
